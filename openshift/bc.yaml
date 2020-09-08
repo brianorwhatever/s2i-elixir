@@ -9,9 +9,10 @@ spec:
   source: 
     git:
       uri: "https://github.com/brianorwhatever/s2i-elixir.git"
+    contextDir: 1.6/otp-21
   strategy: 
     dockerStrategy:
-      dockerfilePath: 1.6/otp-21/Dockerfile
+      dockerfilePath: Dockerfile
   output: 
     to:
       kind: "ImageStreamTag"
