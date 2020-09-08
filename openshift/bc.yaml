@@ -1,0 +1,18 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: "elixir-builder"
+spec:
+  runPolicy: "Serial" 
+  triggers:
+    - type: "ImageChange"
+  source: 
+    git:
+      uri: "https://github.com/brianorwhatever/s2i-elixir.git"
+  strategy: 
+    dockerStrategy:
+      dockerfilePath: 1.6/otp-21/Dockerfile
+  output: 
+    to:
+      kind: "ImageStreamTag"
+      name: "elixir:1.6-otp-21"

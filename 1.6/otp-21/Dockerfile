@@ -14,6 +14,8 @@ LABEL io.k8s.description="Platform for building and running an elixir app" \
 
 USER 0
 
+RUN locale-gen en_US.UTF-8
+
 # Install Elixir
 RUN set -x \
   && yum install -y --setopt=tsflags=nodocs \
@@ -53,6 +55,7 @@ COPY ./s2i/bin/ $STI_SCRIPTS_PATH
 
 # Drop the root user and make the content of /opt/app-root owned by user 1001
 RUN chown -R 1001:0 /opt/app-root && chmod -R ug+rwx /opt/app-root
+RUN chown -R 1001:0 /dev/null
 USER 1001
 
 ENV MIX_ENV prod
