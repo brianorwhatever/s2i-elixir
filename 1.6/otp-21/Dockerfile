@@ -3,9 +3,6 @@ FROM jshmrtn/s2i-erlang:21
 ENV ERLANG_VERSION 21
 ENV ELIXIR_VERSION 1.6.6
 
-RUN dpkg-reconfigure locales
-
-
 LABEL io.k8s.description="Platform for building and running an elixir app" \
       io.k8s.display-name="build-elixir" \
       io.openshift.tags="builder,erlang,elixir" \
@@ -20,6 +17,8 @@ USER 0
 # Install Elixir
 RUN set -x \
   && yum install -y --setopt=tsflags=nodocs \
+    glibc-langpack-en \
+    glibc-locale-source \
     autoconf \
     epel-release \
     gcc \
@@ -34,6 +33,7 @@ RUN set -x \
   && tar xf v${ELIXIR_VERSION}.tar.gz \
   && rm -rf v${ELIXIR_VERSION}.tar.gz \
   && cd elixir-${ELIXIR_VERSION} \
+  && localedef --no-archive -i en_US -f UTF-8 en_US.UTF-8 \
   && make clean test \
   && make install \
   && cd .. \
