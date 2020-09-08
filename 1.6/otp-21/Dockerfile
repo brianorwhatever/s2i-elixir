@@ -14,8 +14,6 @@ LABEL io.k8s.description="Platform for building and running an elixir app" \
 
 USER 0
 
-RUN localedef -i en_US -f UTF-8 en_US.UTF-8
-
 # Install Elixir
 RUN set -x \
   && yum install -y --setopt=tsflags=nodocs \
@@ -27,6 +25,7 @@ RUN set -x \
     glibc-devel \
     make \
     ncurses-devel \
+    glibc-common \
     openssl-devel \
     wxBase \
   && curl -LO "https://github.com/elixir-lang/elixir/archive/v${ELIXIR_VERSION}.tar.gz" \
