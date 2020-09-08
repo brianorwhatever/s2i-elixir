@@ -34,7 +34,6 @@ RUN set -x \
   && rm -rf v${ELIXIR_VERSION}.tar.gz \
   && cd elixir-${ELIXIR_VERSION} \
   && localedef --no-archive -i en_US -f UTF-8 en_US.UTF-8 \
-  && make clean test \
   && make install \
   && cd .. \
   && rm -rf elixir-${ELIXIR_VERSION} \
