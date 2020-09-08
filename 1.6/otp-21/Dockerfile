@@ -3,6 +3,11 @@ FROM jshmrtn/s2i-erlang:21
 ENV ERLANG_VERSION 21
 ENV ELIXIR_VERSION 1.6.6
 
+RUN localedef -i en_US -f UTF-8 en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LC_CTYPE en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+
 LABEL io.k8s.description="Platform for building and running an elixir app" \
       io.k8s.display-name="build-elixir" \
       io.openshift.tags="builder,erlang,elixir" \
@@ -25,7 +30,6 @@ RUN set -x \
     glibc-devel \
     make \
     ncurses-devel \
-    glibc-common \
     openssl-devel \
     wxBase \
   && curl -LO "https://github.com/elixir-lang/elixir/archive/v${ELIXIR_VERSION}.tar.gz" \
