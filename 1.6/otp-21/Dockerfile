@@ -55,7 +55,7 @@ COPY s2i/bin/ $STI_SCRIPTS_PATH
 
 # Drop the root user and make the content of /opt/app-root owned by user 1001
 RUN chown -R 1001:0 /opt/app-root && chmod -R ug+rwx /opt/app-root
-RUN rm -f /dev/null; mknod -m 666 /dev/null c 1 3
+RUN sed 's/> \/dev\/null//g' /usr/local/bin/elixir
 USER 1001
 
 ENV MIX_ENV prod
