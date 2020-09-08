@@ -14,7 +14,7 @@ LABEL io.k8s.description="Platform for building and running an elixir app" \
 
 USER 0
 
-RUN locale-gen en_US.UTF-8
+RUN localedef -i en_US -f UTF-8 en_US.UTF-8
 
 # Install Elixir
 RUN set -x \
